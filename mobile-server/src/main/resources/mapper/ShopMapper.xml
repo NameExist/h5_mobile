@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mobile.mapper.ShopMapper">
+    <select id="queryShopIds" resultType="java.lang.Long">
+        select shop_id from shop
+        <where>
+            <if test="province != null">
+                and province = #{province}
+            </if>
+            <if test="city != null">
+                and city = #{city}
+            </if>
+            <if test="county != null">
+                and county = #{county}
+            </if>
+            <if test="grid != null">
+                and grid = #{grid}
+            </if>
+            <if test="hall != null">
+                and hall = #{hall}
+            </if>
+        </where>
+    </select>
+</mapper>

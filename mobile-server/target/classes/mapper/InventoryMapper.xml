@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mobile.mapper.InventoryMapper">
+    <select id="sumByMap" resultType="java.lang.Integer">
+        select sum(stock_quantity) from stock
+        <where>
+            <if test="day != null">
+                stock_date = #{day}
+                and shop_id in
+                <foreach item="shopId" collection="shopIds" open="(" separator="," close=")">
+                    #{shopId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+    <select id="queryStockStatistics" parameterType="map" resultType="map">
+        SELECT t.type, t.price, SUM(s.stock_quantity) AS total_quantity
+        FROM stock s
+        JOIN terminal t ON s.terminal_id = t.terminal_id
+        WHERE s.shop_id IN
+        <foreach collection="shopIds" item="shopId" open="(" separator="," close=")">
+            #{shopId}
+        </foreach>
+        AND s.stock_date BETWEEN #{begin} AND #{end}
+        GROUP BY t.type, t.price
+    </select>
+</mapper>

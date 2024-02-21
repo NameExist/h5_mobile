@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mobile.mapper.SaleMapper">
+    <select id="sumByMap" resultType="java.lang.Integer">
+        select count(sale_id) from sale
+        <where>
+            <if test="day != null">
+                sale_date = #{day}
+                and shop_id in
+                <foreach item="shopId" collection="shopIds" open="(" separator="," close=")">
+                    #{shopId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+</mapper>

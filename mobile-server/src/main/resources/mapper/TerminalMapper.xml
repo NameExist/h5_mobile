@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mobile.mapper.TerminalMapper">
+    <select id="queryTerminalIds" parameterType="java.util.Map" resultType="java.lang.String">
+        SELECT DISTINCT terminal_id
+        FROM stock
+        WHERE shop_id IN
+        <foreach collection="shopIds" item="shopId" open="(" close=")" separator=",">
+            #{shopId}
+        </foreach>
+        AND stock_date BETWEEN #{beginTime} AND #{endTime}
+    </select>
+</mapper>
