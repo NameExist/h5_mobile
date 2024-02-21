@@ -292,9 +292,9 @@ public class ReportServiceImpl implements ReportService {
     public SaleReportVO contractStatistics(String province, String city, String county, String grid, String hall, LocalDate begin, LocalDate end) {
 
 
-        BigDecimal goldCoinContract = BigDecimal.valueOf(12.3);
-        BigDecimal surplusYield = BigDecimal.valueOf(64.1);
-        BigDecimal installmentContract = BigDecimal.valueOf(83.1);
+        BigDecimal goldCoinContract = BigDecimal.valueOf(33.3);
+        BigDecimal surplusYield = BigDecimal.valueOf(33.3);
+        BigDecimal installmentContract = BigDecimal.valueOf(33.4);
 
         //封装返回结果
         return SaleReportVO
