@@ -289,6 +289,22 @@ public class ReportServiceImpl implements ReportService {
                 .build();
     }
 
+    public SaleReportVO contractStatistics(String province, String city, String county, String grid, String hall, LocalDate begin, LocalDate end) {
+
+
+        BigDecimal goldCoinContract = BigDecimal.valueOf(12.3);
+        BigDecimal surplusYield = BigDecimal.valueOf(64.1);
+        BigDecimal installmentContract = BigDecimal.valueOf(83.1);
+
+        //封装返回结果
+        return SaleReportVO
+                .builder()
+                .goldCoinContract(goldCoinContract)
+                .surplusYield(surplusYield)
+                .installmentContract(installmentContract)
+                .build();
+    }
+
 
     /**
      * 导出运营数据报表

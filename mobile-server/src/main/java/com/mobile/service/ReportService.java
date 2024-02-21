@@ -17,6 +17,8 @@ public interface ReportService {
     InventoryReportVO inventoryModelStatistics(String province, String city, String county, String grid, String hall, LocalDate begin, LocalDate end);
 
     SaleReportVO distributionStatistics(String province, String city, String county, String grid, String hall, LocalDate begin, LocalDate end);
+
+    SaleReportVO contractStatistics(String province, String city, String county, String grid, String hall, LocalDate begin, LocalDate end);
     /**
      * 导出运营数据报表
      * @param response

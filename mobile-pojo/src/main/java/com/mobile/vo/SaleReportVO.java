@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -17,4 +18,9 @@ public class SaleReportVO implements Serializable {
 
     private String saleslist;
 
+    private BigDecimal goldCoinContract;
+
+    private BigDecimal surplusYield;
+
+    private BigDecimal installmentContract;
 }

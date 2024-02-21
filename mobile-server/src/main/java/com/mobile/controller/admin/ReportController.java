@@ -104,6 +104,21 @@ public class ReportController {
         return Result.success(reportService.distributionStatistics(province,city,county,grid,hall,begin,end));
     }
 
+    @GetMapping("/contractStatistics")
+    @ApiOperation("合约销售结构统计")
+    public Result<SaleReportVO> contractStatistics(
+            String province,
+            String city,
+            String county,
+            String grid,
+            String hall,
+            @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate begin,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
+        log.info("单位：{},{},{},{},{}",province,city,county,grid,hall);
+        log.info("销售数量统计：{},{}",begin,end);
+        return Result.success(reportService.contractStatistics(province,city,county,grid,hall,begin,end));
+    }
+
 
     /**
      * 导出运营数据报表
