@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -119,6 +120,66 @@ public class ReportController {
         return Result.success(reportService.contractStatistics(province,city,county,grid,hall,begin,end));
     }
 
+    @GetMapping("/priceStatistics")
+    @ApiOperation("价位销售结构统计")
+    public Result<SaleReportVO> priceStatistics(
+            String province,
+            String city,
+            String county,
+            String grid,
+            String hall,
+            @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate begin,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
+        log.info("单位：{},{},{},{},{}",province,city,county,grid,hall);
+        log.info("库存数量统计：{},{}",begin,end);
+        return Result.success(reportService.priceStatistics(province,city,county,grid,hall,begin,end));
+    }
+
+
+    @GetMapping("/qualityStatistics")
+    @ApiOperation("终端销售质量统计")
+    public Result<SaleReportVO> qualityStatistics(
+            String province,
+            String city,
+            String county,
+            String grid,
+            String hall,
+            @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate begin,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
+        log.info("单位：{},{},{},{},{}",province,city,county,grid,hall);
+        log.info("销售数量统计：{},{}",begin,end);
+        return Result.success(reportService.qualityStatistics(province,city,county,grid,hall,begin,end));
+    }
+
+    @GetMapping("/modelStatistics")
+    @ApiOperation("机型销售结构统计")
+    public Result<SaleReportVO> modelStatistics(
+            String province,
+            String city,
+            String county,
+            String grid,
+            String hall,
+            @DateTimeFormat(pattern = "yyyy-MM-dd")  LocalDate begin,
+            @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
+        log.info("单位：{},{},{},{},{}",province,city,county,grid,hall);
+        log.info("库存数量统计：{},{}",begin,end);
+        return Result.success(reportService.modelStatistics(province,city,county,grid,hall,begin,end));
+    }
+
+    @GetMapping("/channelStatistics")
+    @ApiOperation("渠道销售情况统计")
+    public Result<SaleReportVO> channelStatistics(
+            String province,
+            String city,
+            String county,
+            String grid,
+            String hall,
+            @RequestParam("year") int year){
+        log.info("单位：{},{},{},{},{}",province,city,county,grid,hall);
+        log.info("库存数量统计：{}",year);
+//        LocalDate localDate = LocalDate.of(year, 1, 1);
+        return Result.success(reportService.channelStatistics(province,city,county,grid,hall,year));
+    }
 
     /**
      * 导出运营数据报表

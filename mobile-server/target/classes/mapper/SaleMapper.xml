@@ -14,5 +14,36 @@
             </if>
         </where>
     </select>
+    <select id="querySalesByDateAndShopIds" resultType="map">
+        SELECT sale_contract, count(*) as count
+        FROM sale
+        WHERE sale_date = #{date}
+        AND shop_id IN
+        <foreach item="shopId" collection="shopIds" open="(" separator="," close=")">
+            #{shopId}
+        </foreach>
+        GROUP BY sale_contract
+    </select>
+    <select id="querySaleStatistics" parameterType="map" resultType="map">
+        SELECT t.type, t.price, count(s.sale_id) AS total_quantity
+        FROM sale s
+        JOIN terminal t ON s.terminal_id = t.terminal_id
+        WHERE s.shop_id IN
+        <foreach collection="shopIds" item="shopId" open="(" separator="," close=")">
+            #{shopId}
+        </foreach>
+        AND s.sale_date BETWEEN #{begin} AND #{end}
+        GROUP BY t.type, t.price
+    </select>
 
+    <select id="querySalesByShopIdsAndYear" resultType="map">
+        SELECT shop_id, count(sale_id) as sale_count
+        FROM sale
+        WHERE YEAR(sale_date) = #{year}
+        AND shop_id IN
+        <foreach item="shopId" collection="shopIds" open="(" separator="," close=")">
+            #{shopId}
+        </foreach>
+        GROUP BY shop_id
+    </select>
 </mapper>

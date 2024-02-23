@@ -23,4 +23,28 @@ public class SaleReportVO implements Serializable {
     private BigDecimal surplusYield;
 
     private BigDecimal installmentContract;
+
+    private String pricelist;
+
+    private String proportionlist;
+
+    private String modellist;
+
+    private BigDecimal rate1;
+
+    private BigDecimal rate2;
+
+    private BigDecimal rate3;
+
+    private String channellist;
+
+    private String channelnumber;
+
+    private String availablenumber;
+
+    private String availablerate;
+
+    private String effectivenumber;
+
+    private String effectiverate;
 }

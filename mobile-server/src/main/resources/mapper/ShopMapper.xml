@@ -22,4 +22,9 @@
             </if>
         </where>
     </select>
+    <select id="queryChannelByShopId" resultType="java.lang.String">
+        SELECT channel
+        FROM shop
+        WHERE shop_id = #{shopId}
+    </select>
 </mapper>

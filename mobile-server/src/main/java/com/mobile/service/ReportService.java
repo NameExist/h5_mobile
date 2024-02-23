@@ -19,6 +19,14 @@ public interface ReportService {
     SaleReportVO distributionStatistics(String province, String city, String county, String grid, String hall, LocalDate begin, LocalDate end);
 
     SaleReportVO contractStatistics(String province, String city, String county, String grid, String hall, LocalDate begin, LocalDate end);
+
+    SaleReportVO qualityStatistics(String province, String city, String county, String grid, String hall, LocalDate begin, LocalDate end);
+
+    SaleReportVO priceStatistics(String province, String city, String county, String grid, String hall, LocalDate begin, LocalDate end);
+
+    SaleReportVO modelStatistics(String province, String city, String county, String grid, String hall, LocalDate begin, LocalDate end);
+
+    SaleReportVO channelStatistics(String province, String city, String county, String grid, String hall, int year);
     /**
      * 导出运营数据报表
      * @param response
