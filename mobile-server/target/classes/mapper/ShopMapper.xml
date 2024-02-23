@@ -17,7 +17,7 @@
             <if test="grid != null">
                 and grid = #{grid}
             </if>
-            <if test="hall != null">
+            <if test="hall != null and hall != ''">
                 and hall = #{hall}
             </if>
         </where>

@@ -5,19 +5,19 @@
     <select id="queryShopIds" resultType="java.lang.Long">
         select shop_id from shop
         <where>
-            <if test="province != null">
+            <if test="province != null and province != ''">
                 and province = #{province}
             </if>
-            <if test="city != null">
+            <if test="city != null and city != ''">
                 and city = #{city}
             </if>
-            <if test="county != null">
+            <if test="county != null and county != ''">
                 and county = #{county}
             </if>
-            <if test="grid != null">
+            <if test="grid != null and grid != ''">
                 and grid = #{grid}
             </if>
-            <if test="hall != null">
+            <if test="hall != null and hall != ''">
                 and hall = #{hall}
             </if>
         </where>
