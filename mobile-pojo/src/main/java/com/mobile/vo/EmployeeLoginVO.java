@@ -28,4 +28,7 @@ public class EmployeeLoginVO implements Serializable {
     @ApiModelProperty("jwt令牌")
     private String token;
 
+    @ApiModelProperty("权限")
+    private String authority;
+
 }

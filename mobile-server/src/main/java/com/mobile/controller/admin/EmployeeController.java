@@ -56,6 +56,7 @@ public class EmployeeController {
                 .name(employee.getName())
                 .number(employee.getNumber())
                 .token(token)
+                .authority(employee.getAuthority())
                 .build();
 
         return Result.success(employeeLoginVO);
@@ -66,5 +67,6 @@ public class EmployeeController {
     public Result<String> logout() {
         return Result.success();
     }
+
 
 }

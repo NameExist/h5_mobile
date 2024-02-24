@@ -23,4 +23,6 @@ public class Employee implements Serializable {
     private String number;
 
     private String password;
+
+    private String authority;
 }
