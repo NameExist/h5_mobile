@@ -95,36 +95,54 @@ public class ReportServiceImpl implements ReportService {
                 .build();
     }
 
-    public ShopReportVO GetCities() {
-        List<String> provinces = shopMapper.selectAllProvinces();
-        List<String> cities = new ArrayList<>();
-        List<String> counties = new ArrayList<>();
-        List<String> grids = new ArrayList<>();
-        List<String> halls = new ArrayList<>();
-
-        for (String province : provinces) {
-            cities.addAll(shopMapper.selectCitiesByProvince(province));
-        }
-
-        for (String city : cities) {
-            counties.addAll(shopMapper.selectCountiesByCity(city));
-        }
-
-        for (String county : counties) {
-            grids.addAll(shopMapper.selectGridsByCounty(county));
-        }
-
-        for (String grid : grids) {
-            halls.addAll(shopMapper.selectHallsByGrid(grid));
-        }
+    public ShopReportVO QueryProvinces(String province) {
+        List<String> provinces = shopMapper.QueryProvinces(province);
 
         //封装返回结果
         return ShopReportVO
                 .builder()
                 .province(StringUtils.join(provinces, ","))
+                .build();
+    }
+
+    public ShopReportVO QueryCities(String city) {
+        List<String> cities = shopMapper.QueryCities(city);
+
+        //封装返回结果
+        return ShopReportVO
+                .builder()
                 .city(StringUtils.join(cities, ","))
+                .build();
+    }
+
+    public ShopReportVO QueryCounties(String county) {
+        List<String> counties = shopMapper.QueryCounties(county);
+
+        //封装返回结果
+        return ShopReportVO
+                .builder()
                 .county(StringUtils.join(counties, ","))
+                .build();
+    }
+
+    public ShopReportVO QueryGrids(String grid) {
+        List<String> grids = shopMapper.QueryGrids(grid);
+
+
+        //封装返回结果
+        return ShopReportVO
+                .builder()
                 .grid(StringUtils.join(grids, ","))
+                .build();
+    }
+
+
+    public ShopReportVO QueryHalls(String hall) {
+        List<String> halls = shopMapper.QueryHalls(hall);
+
+        //封装返回结果
+        return ShopReportVO
+                .builder()
                 .hall(StringUtils.join(halls, ","))
                 .build();
     }
@@ -614,7 +632,8 @@ public class ReportServiceImpl implements ReportService {
         Map<String, Integer> channelTypeCountMap3 = new HashMap<>();
 
         for (Map<String, Object> sale : sales) {
-            Long shopId = (Long) sale.get("shop_id");
+            Number shopId = (Number) sale.get("shop_id");
+            shopId = shopId.longValue();
             Long saleCount = (Long) sale.get("sale_count");
             String channel = channelMap.get(shopId);
 

@@ -10,6 +10,5 @@ public interface EmployeeMapper {
     @Select("select * from user where name = #{username}")
     Employee getByUsername(String username);
 
-
 }
 

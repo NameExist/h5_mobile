@@ -61,6 +61,33 @@ public class ReportController {
         return Result.success(reportService.GetHalls(grid));
     }
 
+
+    @GetMapping("/QueryProvinces")
+    @ApiOperation("省级地区查询")
+    public Result<ShopReportVO> QueryProvinces(String province){
+        return Result.success(reportService.QueryProvinces(province));
+    }
+
+    @GetMapping("/QueryCities")
+    @ApiOperation("市级地区查询")
+    public Result<ShopReportVO> QueryCities(String city){return Result.success(reportService.QueryCities(city)); }
+
+    @GetMapping("/QueryCounties")
+    @ApiOperation("区县级地区查询")
+    public Result<ShopReportVO> QueryCounties(String county){return Result.success(reportService.QueryCounties(county)); }
+
+    @GetMapping("/QueryGrids")
+    @ApiOperation("网格级地区查询")
+    public Result<ShopReportVO> QueryGrids(String grid){
+        return Result.success(reportService.QueryGrids(grid));
+    }
+
+    @GetMapping("/QueryHalls")
+    @ApiOperation("厅店级地区查询")
+    public Result<ShopReportVO> QueryHalls(String hall){
+        return Result.success(reportService.QueryHalls(hall));
+    }
+
     @GetMapping("/OrderStatistics")
     @ApiOperation("终端订货数量统计")
     public Result<OrderReportVO> OrderStatistics(

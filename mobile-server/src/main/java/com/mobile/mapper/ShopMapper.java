@@ -29,4 +29,19 @@ public interface ShopMapper {
     // 根据网格查询所有门店
     List<String> selectHallsByGrid(String grid);
 
+    // 查询所有省份
+    List<String> QueryProvinces(String province);
+
+    // 查询所有城市
+    List<String> QueryCities(String city);
+
+    // 查询所有区县
+    List<String> QueryCounties(String county);
+
+    // 查询所有网格
+    List<String> QueryGrids(String grid);
+
+    // 查询所有门店
+    List<String> QueryHalls(String hall);
+
 }

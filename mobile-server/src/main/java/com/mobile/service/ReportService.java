@@ -39,6 +39,16 @@ public interface ReportService {
 
     ShopReportVO GetHalls(String grid);
 
+    ShopReportVO QueryProvinces(String province);
+
+    ShopReportVO QueryCities(String city);
+
+    ShopReportVO QueryCounties(String county);
+
+    ShopReportVO QueryGrids(String grid);
+
+    ShopReportVO QueryHalls(String hall);
+
     /**
      * 导出运营数据报表
      * @param response

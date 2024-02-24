@@ -51,4 +51,30 @@
     <select id="selectHallsByGrid" resultType="java.lang.String">
         SELECT DISTINCT hall FROM shop WHERE grid = #{grid};
     </select>
+
+    <select id="QueryProvinces" resultType="java.lang.String">
+        SELECT DISTINCT province FROM shop
+        WHERE province LIKE CONCAT(#{province}, '%')
+    </select>
+
+    <select id="QueryCities" resultType="java.lang.String">
+        SELECT DISTINCT city FROM shop
+        WHERE city LIKE CONCAT(#{city}, '%')
+    </select>
+
+    <select id="QueryCounties" resultType="java.lang.String">
+        SELECT DISTINCT county FROM shop
+        WHERE county LIKE CONCAT(#{county}, '%')
+    </select>
+
+    <select id="QueryGrids" resultType="java.lang.String">
+        SELECT DISTINCT grid FROM shop
+        WHERE grid LIKE CONCAT(#{grid}, '%')
+    </select>
+
+    <select id="QueryHalls" resultType="java.lang.String">
+        SELECT DISTINCT hall FROM shop
+        WHERE hall LIKE CONCAT(#{hall}, '%')
+    </select>
+
 </mapper>

@@ -17,13 +17,13 @@ import java.io.Serializable;
 public class EmployeeLoginVO implements Serializable {
 
     @ApiModelProperty("主键值")
-    private Long user_id;
+    private Long userid;
 
     @ApiModelProperty("用户名")
     private String name;
 
     @ApiModelProperty("工号")
-    private String mumber;
+    private String number;
 
     @ApiModelProperty("jwt令牌")
     private String token;
