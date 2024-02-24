@@ -29,7 +29,16 @@ public interface ReportService {
 
     SaleReportVO channelStatistics(String province, String city, String county, String grid, String hall, int year);
 
-    ShopReportVO GetRegion();
+    ShopReportVO GetProvinces();
+
+    ShopReportVO GetCities(String province);
+
+    ShopReportVO GetCounties(String city);
+
+    ShopReportVO GetGrids(String county);
+
+    ShopReportVO GetHalls(String grid);
+
     /**
      * 导出运营数据报表
      * @param response

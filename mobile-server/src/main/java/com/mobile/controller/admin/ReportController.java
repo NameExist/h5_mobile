@@ -30,10 +30,35 @@ public class ReportController {
     @Autowired
     private ReportService reportService;
 
-    @GetMapping("/GetRegion")
-    @ApiOperation("厅店地区统计")
-    public Result<ShopReportVO> GetRegion(){
-        return Result.success(reportService.GetRegion());
+    @GetMapping("/GetProvinces")
+    @ApiOperation("省级地区统计")
+    public Result<ShopReportVO> GetProvinces(){
+        return Result.success(reportService.GetProvinces());
+    }
+
+    @GetMapping("/GetCities")
+    @ApiOperation("市级地区统计")
+    public Result<ShopReportVO> GetCities(String province){
+        return Result.success(reportService.GetCities(province));
+    }
+
+    @GetMapping("/GetCounties")
+    @ApiOperation("区县级地区统计")
+    public Result<ShopReportVO> GetCounties(String city){
+        return Result.success(reportService.GetCounties(city));
+    }
+
+
+    @GetMapping("/GetGrids")
+    @ApiOperation("网格级地区统计")
+    public Result<ShopReportVO> GetGrids(String county){
+        return Result.success(reportService.GetGrids(county));
+    }
+
+    @GetMapping("/GetHalls")
+    @ApiOperation("厅店级地区统计")
+    public Result<ShopReportVO> GetHalls(String grid){
+        return Result.success(reportService.GetHalls(grid));
     }
 
     @GetMapping("/OrderStatistics")

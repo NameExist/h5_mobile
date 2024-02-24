@@ -43,7 +43,59 @@ public class ReportServiceImpl implements ReportService {
 //    @Autowired
 //    private WorkspaceService workspaceService;
 
-    public ShopReportVO GetRegion() {
+    public ShopReportVO GetProvinces() {
+        List<String> provinces = shopMapper.selectAllProvinces();
+
+        //封装返回结果
+        return ShopReportVO
+                .builder()
+                .province(StringUtils.join(provinces, ","))
+                .build();
+    }
+
+    public ShopReportVO GetCities(String province) {
+        List<String> cities = shopMapper.selectCitiesByProvince(province);
+
+        //封装返回结果
+        return ShopReportVO
+                .builder()
+                .city(StringUtils.join(cities, ","))
+                .build();
+    }
+
+    public ShopReportVO GetCounties(String city) {
+        List<String> counties = shopMapper.selectCountiesByCity(city);
+
+        //封装返回结果
+        return ShopReportVO
+                .builder()
+                .county(StringUtils.join(counties, ","))
+                .build();
+    }
+
+    public ShopReportVO GetGrids(String county) {
+        List<String> grids = shopMapper.selectGridsByCounty(county);
+
+
+        //封装返回结果
+        return ShopReportVO
+                .builder()
+                .grid(StringUtils.join(grids, ","))
+                .build();
+    }
+
+
+    public ShopReportVO GetHalls(String grid) {
+        List<String> halls = shopMapper.selectHallsByGrid(grid);
+
+        //封装返回结果
+        return ShopReportVO
+                .builder()
+                .hall(StringUtils.join(halls, ","))
+                .build();
+    }
+
+    public ShopReportVO GetCities() {
         List<String> provinces = shopMapper.selectAllProvinces();
         List<String> cities = new ArrayList<>();
         List<String> counties = new ArrayList<>();
@@ -76,6 +128,7 @@ public class ReportServiceImpl implements ReportService {
                 .hall(StringUtils.join(halls, ","))
                 .build();
     }
+
 
     public OrderReportVO getOrderStatistics(String province, String city, String county, String grid, String hall, LocalDate begin, LocalDate end) {
         Map params = new HashMap();
