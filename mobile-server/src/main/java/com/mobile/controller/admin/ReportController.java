@@ -5,6 +5,7 @@ import com.mobile.service.ReportService;
 import com.mobile.vo.InventoryReportVO;
 import com.mobile.vo.OrderReportVO;
 import com.mobile.vo.SaleReportVO;
+import com.mobile.vo.ShopReportVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,12 @@ public class ReportController {
 
     @Autowired
     private ReportService reportService;
+
+    @GetMapping("/GetRegion")
+    @ApiOperation("厅店地区统计")
+    public Result<ShopReportVO> GetRegion(){
+        return Result.success(reportService.GetRegion());
+    }
 
     @GetMapping("/OrderStatistics")
     @ApiOperation("终端订货数量统计")

@@ -3,6 +3,7 @@ package com.mobile.service;
 import com.mobile.vo.InventoryReportVO;
 import com.mobile.vo.OrderReportVO;
 import com.mobile.vo.SaleReportVO;
+import com.mobile.vo.ShopReportVO;
 
 import java.time.LocalDate;
 
@@ -27,6 +28,8 @@ public interface ReportService {
     SaleReportVO modelStatistics(String province, String city, String county, String grid, String hall, LocalDate begin, LocalDate end);
 
     SaleReportVO channelStatistics(String province, String city, String county, String grid, String hall, int year);
+
+    ShopReportVO GetRegion();
     /**
      * 导出运营数据报表
      * @param response

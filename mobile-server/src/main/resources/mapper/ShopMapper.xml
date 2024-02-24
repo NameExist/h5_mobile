@@ -27,4 +27,28 @@
         FROM shop
         WHERE shop_id = #{shopId}
     </select>
+    <!-- selectAllProvinces -->
+    <select id="selectAllProvinces" resultType="java.lang.String">
+        SELECT DISTINCT province FROM shop;
+    </select>
+
+    <!-- selectCitiesByProvince -->
+    <select id="selectCitiesByProvince" resultType="java.lang.String">
+        SELECT DISTINCT city FROM shop WHERE province = #{province};
+    </select>
+
+    <!-- selectCountiesByCity -->
+    <select id="selectCountiesByCity" resultType="java.lang.String">
+        SELECT DISTINCT county FROM shop WHERE city = #{city};
+    </select>
+
+    <!-- selectGridsByCounty -->
+    <select id="selectGridsByCounty" resultType="java.lang.String">
+        SELECT DISTINCT grid FROM shop WHERE county = #{county};
+    </select>
+
+    <!-- selectHallsByGrid -->
+    <select id="selectHallsByGrid" resultType="java.lang.String">
+        SELECT DISTINCT hall FROM shop WHERE grid = #{grid};
+    </select>
 </mapper>

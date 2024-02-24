@@ -43,6 +43,40 @@ public class ReportServiceImpl implements ReportService {
 //    @Autowired
 //    private WorkspaceService workspaceService;
 
+    public ShopReportVO GetRegion() {
+        List<String> provinces = shopMapper.selectAllProvinces();
+        List<String> cities = new ArrayList<>();
+        List<String> counties = new ArrayList<>();
+        List<String> grids = new ArrayList<>();
+        List<String> halls = new ArrayList<>();
+
+        for (String province : provinces) {
+            cities.addAll(shopMapper.selectCitiesByProvince(province));
+        }
+
+        for (String city : cities) {
+            counties.addAll(shopMapper.selectCountiesByCity(city));
+        }
+
+        for (String county : counties) {
+            grids.addAll(shopMapper.selectGridsByCounty(county));
+        }
+
+        for (String grid : grids) {
+            halls.addAll(shopMapper.selectHallsByGrid(grid));
+        }
+
+        //封装返回结果
+        return ShopReportVO
+                .builder()
+                .province(StringUtils.join(provinces, ","))
+                .city(StringUtils.join(cities, ","))
+                .county(StringUtils.join(counties, ","))
+                .grid(StringUtils.join(grids, ","))
+                .hall(StringUtils.join(halls, ","))
+                .build();
+    }
+
     public OrderReportVO getOrderStatistics(String province, String city, String county, String grid, String hall, LocalDate begin, LocalDate end) {
         Map params = new HashMap();
         params.put("province", province);
