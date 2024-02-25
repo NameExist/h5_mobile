@@ -25,4 +25,15 @@
         AND s.stock_date BETWEEN #{begin} AND #{end}
         GROUP BY t.price
     </select>
+    <select id="queryStockStatistics2" parameterType="map" resultType="map">
+        SELECT t.type, t.price, SUM(s.stock_quantity) AS total_quantity
+        FROM stock s
+        JOIN terminal t ON s.terminal_id = t.terminal_id
+        WHERE s.shop_id IN
+        <foreach collection="shopIds" item="shopId" open="(" separator="," close=")">
+            #{shopId}
+        </foreach>
+        AND s.stock_date BETWEEN #{begin} AND #{end}
+        GROUP BY t.type, t.price
+    </select>
 </mapper>

@@ -48,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new PasswordErrorException(PASSWORD_ERROR);
         }
 
-        //3、返回实体对象
+        //返回实体对象
         return employee;
     }
 }

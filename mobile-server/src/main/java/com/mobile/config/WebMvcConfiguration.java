@@ -3,9 +3,12 @@ package com.mobile.config;
 //import com.mobile.interceptor.JwtTokenAdminInterceptor;
 //import com.mobile.interceptor.JwtTokenUserInterceptor;
 //import com.mobile.json.JacksonObjectMapper;
+import com.mobile.interceptor.JwtTokenAdminInterceptor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -22,8 +25,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Slf4j
 public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
-//    @Autowired
-//    private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
+    @Autowired
+    private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
 //    @Autowired
 //    private JwtTokenUserInterceptor jwtTokenUserInterceptor;
 
@@ -31,17 +34,17 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * 注册自定义拦截器
      * @param registry
      */
-//    protected void addInterceptors(InterceptorRegistry registry) {
-//        log.info("开始注册自定义拦截器...");
-//        registry.addInterceptor(jwtTokenAdminInterceptor)
-//                .addPathPatterns("/admin/**")
-//                .excludePathPatterns("/admin/employee/login");
-//
+    protected void addInterceptors(InterceptorRegistry registry) {
+        log.info("开始注册自定义拦截器...");
+        registry.addInterceptor(jwtTokenAdminInterceptor)
+                .addPathPatterns("/mobile/**")
+                .excludePathPatterns("/mobile/login");
+
 //        registry.addInterceptor(jwtTokenUserInterceptor)
 //                .addPathPatterns("/user/**")
 //                .excludePathPatterns("/user/user/login")
 //                .excludePathPatterns("/user/shop/status");
-//    }
+    }
 
     @Bean
     public Docket docket1(){

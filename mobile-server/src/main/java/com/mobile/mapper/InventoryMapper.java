@@ -14,5 +14,7 @@ public interface InventoryMapper {
     Integer sumByMap(Map map);
 
     List<Map<String, Object>> queryStockStatistics(Map<String, Object> params);
+
+    List<Map<String, Object>> queryStockStatistics2(Map<String, Object> params);
 }
 

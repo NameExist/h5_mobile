@@ -295,7 +295,7 @@ public class ReportServiceImpl implements ReportService {
         params.put("shopIds", shopIds);
         params.put("begin", begin);
         params.put("end", end);
-        List<Map<String, Object>> stockStatistics = inventoryMapper.queryStockStatistics(params);
+        List<Map<String, Object>> stockStatistics = inventoryMapper.queryStockStatistics2(params);
 
         // 统计每种机型的库存数量
         Map<String, Integer> modelInventoryMap = new HashMap<>();
