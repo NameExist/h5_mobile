@@ -259,13 +259,13 @@ public class ReportServiceImpl implements ReportService {
             // 处理查询结果并填充 pricelist、inventoryList 和 proportionlist
             // 根据 type 和 price 获取对应的价格段
             String price = row.get("price").toString();
-            String type = row.get("type").toString();
-            String priceSegment = type + "-" + price;
+//            String type = row.get("type").toString();
+//            String priceSegment = type + "-" + price;
 
             // 获取库存数量
             int inventory = ((BigDecimal) row.get("total_quantity")).intValue();
 
-            pricelist.add(priceSegment);
+            pricelist.add(price);
             inventoryList.add(String.valueOf(inventory));
 
             // 计算当前价格段占比
