@@ -47,4 +47,6 @@ public class SaleReportVO implements Serializable {
     private String effectivenumber;
 
     private String effectiverate;
+
+    private double growthRate;
 }

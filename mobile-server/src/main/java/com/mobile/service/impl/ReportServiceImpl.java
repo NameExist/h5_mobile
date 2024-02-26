@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -389,11 +390,35 @@ public class ReportServiceImpl implements ReportService {
             saleslist.add(turnover);
         }
 
+        //计算上一个月的日期范围
+        LocalDate lastMonthBegin = end.minusMonths(1).withDayOfMonth(1);
+        LocalDate lastMonthEnd = end.minusMonths(1).with(TemporalAdjusters.lastDayOfMonth());
+
+        //获取本月和上个月的销售量总和
+        int currentMonthSum = 0;
+        int lastMonthSum = 0;
+        for (int i = 0; i < dateList.size(); i++) {
+            LocalDate date = dateList.get(i);
+            int sales = saleslist.get(i);
+            if ((date.isAfter(lastMonthEnd) || date.isEqual(lastMonthEnd)) && date.isBefore(end.plusDays(1))) {
+                currentMonthSum += sales;
+            } else if ((date.isAfter(lastMonthBegin) || date.isEqual(lastMonthBegin)) && date.isBefore(lastMonthEnd.plusDays(1))) {
+                lastMonthSum += sales;
+            }
+        }
+
+        //计算环比增长率
+        double growthRate = 0.0;
+        if (lastMonthSum != 0) {
+            growthRate = (currentMonthSum - lastMonthSum) / (double) lastMonthSum;
+        }
+
         //封装返回结果
         return SaleReportVO
                 .builder()
                 .dateList(StringUtils.join(dateList, ","))
                 .saleslist(StringUtils.join(saleslist, ","))
+                .growthRate(growthRate)
                 .build();
     }
 
@@ -489,13 +514,13 @@ public class ReportServiceImpl implements ReportService {
             // 处理查询结果并填充 pricelist、inventoryList 和 proportionlist
             // 根据 type 和 price 获取对应的价格段
             String price = row.get("price").toString();
-            String type = row.get("type").toString();
-            String priceSegment = type + "-" + price;
+//            String type = row.get("type").toString();
+//            String priceSegment = type + "-" + price;
 
             // 获取库存数量
             int inventory = ((Long) row.get("total_quantity")).intValue();
 
-            pricelist.add(priceSegment);
+            pricelist.add(price);
             saleslist.add(String.valueOf(inventory));
 
             // 计算当前价格段占比
@@ -525,7 +550,7 @@ public class ReportServiceImpl implements ReportService {
         params.put("shopIds", shopIds);
         params.put("begin", begin);
         params.put("end", end);
-        List<Map<String, Object>> stockStatistics = saleMapper.querySaleStatistics(params);
+        List<Map<String, Object>> stockStatistics = saleMapper.querySaleStatistics2(params);
 
         // 统计每种机型的库存数量
         Map<String, Integer> modelInventoryMap = new HashMap<>();

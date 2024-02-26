@@ -25,6 +25,17 @@
         GROUP BY sale_contract
     </select>
     <select id="querySaleStatistics" parameterType="map" resultType="map">
+        SELECT t.price, count(s.sale_id) AS total_quantity
+        FROM sale s
+        JOIN terminal t ON s.terminal_id = t.terminal_id
+        WHERE s.shop_id IN
+        <foreach collection="shopIds" item="shopId" open="(" separator="," close=")">
+            #{shopId}
+        </foreach>
+        AND s.sale_date BETWEEN #{begin} AND #{end}
+        GROUP BY t.price
+    </select>
+    <select id="querySaleStatistics2" parameterType="map" resultType="map">
         SELECT t.type, t.price, count(s.sale_id) AS total_quantity
         FROM sale s
         JOIN terminal t ON s.terminal_id = t.terminal_id

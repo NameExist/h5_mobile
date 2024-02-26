@@ -19,6 +19,8 @@ public interface SaleMapper {
 
     List<Map<String, Object>> querySaleStatistics(Map<String, Object> params);
 
+    List<Map<String, Object>> querySaleStatistics2(Map<String, Object> params);
+
     List<Map<String, Object>> querySalesByShopIdsAndYear(@Param("shopIds") List<Long> shopIds, @Param("year") int year);
 
 }
