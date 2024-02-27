@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 员工管理
@@ -33,6 +35,9 @@ public class EmployeeController {
 
     @Autowired
     private JwtProperties jwtProperties;
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
     public static final String EMP_ID = "empId";
 
@@ -50,6 +55,11 @@ public class EmployeeController {
                 jwtProperties.getAdminSecretKey(),
                 jwtProperties.getAdminTtl(),
                 claims);
+
+        // 将token存入Redis，并设置过期时间
+        String redisKey = "employee_token:" + employee.getUserid();
+        redisTemplate.opsForValue().set(redisKey, token);
+        redisTemplate.expire(redisKey, jwtProperties.getAdminTtl(), TimeUnit.SECONDS);
 
         EmployeeLoginVO employeeLoginVO = EmployeeLoginVO.builder()
                 .userid(employee.getUserid())

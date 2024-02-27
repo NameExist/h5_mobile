@@ -45,3 +45,4 @@ mobile:
     user-secret-key: usermobile
     user-ttl: 7200000
     user-token-name: authentication
+
